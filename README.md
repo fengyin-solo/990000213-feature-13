@@ -118,6 +118,16 @@ The frontend will be available at `http://localhost:5173`
 | PUT | `/api/articles/:id` | Update article | Yes |
 | DELETE | `/api/articles/:id` | Delete article | Yes |
 | GET | `/api/tags` | Get all unique tags | No |
+| GET | `/api/stats?preset=7d\|30d\|month` | Interval statistics (new articles, top tags, trend) | Yes |
+| GET | `/api/stats?start=YYYY-MM-DD&end=YYYY-MM-DD` | Statistics for a custom inclusive date range | Yes |
+| GET | `/api/stats/export?...&format=md\|csv` | Download a deterministic interval report (Markdown/CSV) | Yes |
+
+Interval statistics and report exports require an admin token. Invalid ranges
+(start later than end, malformed dates, ranges over 366 days) return `400` with
+an explanatory message. Reports are generated from the same data as the JSON
+statistics, carry a SHA-256 data fingerprint (identical across Markdown/CSV and
+repeated downloads) and a per-file checksum, so repeated downloads can never
+contradict each other.
 
 ## Admin Credentials
 

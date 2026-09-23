@@ -4,6 +4,7 @@ const path = require('path');
 const initDb = require('./db/init');
 const articlesRouter = require('./routes/articles');
 const authRouter = require('./routes/auth');
+const statsRouter = require('./routes/stats');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -18,6 +19,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRouter);
 app.use('/api/articles', articlesRouter);
+app.use('/api/stats', statsRouter);
 
 // Tags route
 const { getTags } = require('./routes/articles');
