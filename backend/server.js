@@ -4,6 +4,7 @@ const path = require('path');
 const initDb = require('./db/init');
 const articlesRouter = require('./routes/articles');
 const authRouter = require('./routes/auth');
+const statsRouter = require('./routes/stats');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -22,6 +23,9 @@ app.use('/api/articles', articlesRouter);
 // Tags route
 const { getTags } = require('./routes/articles');
 app.get('/api/tags', getTags);
+
+// Stats routes
+app.use('/api/stats', statsRouter);
 
 // Error handling
 app.use((err, req, res, next) => {
